@@ -9,6 +9,8 @@ import history from '../services/history';
 import { Form } from '@unform/web';
 import Input from '../components/Input';
 
+import LazyLoad from 'react-lazyload';
+
 export default function Main() {
   const dispatch = useDispatch();
   const [posts, setPosts] = useState([]);
@@ -20,7 +22,7 @@ export default function Main() {
         const response = await api.get('/posts');
         const imgPost = response.data.map(post => ({
           ...post,
-          img: `https://randomuser.me/api/portraits/women/${Math.floor(Math.random() * 90) + 1}.jpg`
+          img: `https://avatars2.githubusercontent.com/u/${Math.floor(Math.random() * 300) + 1}?s=500`
         }))
         setPosts(imgPost);
       } catch (err) {
@@ -38,7 +40,7 @@ export default function Main() {
     setPosts([
       {
         id: posts.length + 1,
-        img: `https://randomuser.me/api/portraits/women/${Math.floor(Math.random() * 90) + 1}.jpg`,
+        img: `https://avatars2.githubusercontent.com/u/${Math.floor(Math.random() * 300) + 1}?s=500`,
         ...e,
       },
       ...posts,
@@ -73,7 +75,9 @@ export default function Main() {
       { posts.map((post) => (
 
         <Content key={post.id}>
-          <img alt='imagem' src={post.img} />
+          <LazyLoad height={200} once  >
+            <img alt='imagem' src={post.img} />
+          </LazyLoad>
           <span>Autor: {post.userId}</span>
           <strong value={post.id}>{post.title}</strong>
           <span>{post.body}</span>
