@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import api from '../services/api';
+import { Content } from './styles'
 
 export default function Post() {
   const [comments, setComments] = useState([]);
@@ -20,10 +21,10 @@ export default function Post() {
   return (
     <>
       { comments.map((comment) => (
-        <h1 key={comment.id}>
-          {comment.name} -
-          {comment.body}
-        </h1>
+        <Content key={comment.id}>
+          <strong>{comment.name}</strong>
+          <span>{comment.body}</span>
+        </Content>
       ))}
     </>
   );

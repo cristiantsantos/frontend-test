@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import api from '../services/api';
+import { Content } from './styles'
 
 export default function Main() {
   const [posts, setPosts] = useState([]);
@@ -19,11 +20,11 @@ export default function Main() {
   return (
     <>
       { posts.map((post) => (
-        <h1 key={post.id}>
-          {post.userId} -
-          {post.title} -
-          {post.body}
-        </h1>
+        <Content key={post.id}>
+          <span>{post.userId}</span>
+          <strong>{post.title}</strong>
+          <span>{post.body}</span>
+        </Content>
       ))}
     </>
   );
