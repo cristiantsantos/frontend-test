@@ -12,7 +12,6 @@ display: flex;
 flex-direction: column;
 justify-content: space-between;
 align-items: center;
-cursor:pointer;
 &:hover {
   opacity: 0.8;
 }
@@ -22,6 +21,9 @@ strong {
 }
 span {
   font-size: 14px;
+}
+button {
+  cursor:pointer;
 }
 
 `;
