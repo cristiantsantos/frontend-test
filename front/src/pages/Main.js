@@ -1,12 +1,12 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { Form } from '@unform/web';
 import api from '../services/api';
 import { Content } from './styles';
 import { postSet } from '../store/modules/post/actions';
 import history from '../services/history';
 
+import { Form } from '@unform/web';
 import Input from '../components/Input';
 
 export default function Main() {
@@ -18,7 +18,11 @@ export default function Main() {
     async function loadPosts() {
       try {
         const response = await api.get('/posts');
-        setPosts(response.data);
+        const imgPost = response.data.map(post => ({
+          ...post,
+          img: `https://randomuser.me/api/portraits/women/${Math.floor(Math.random() * 90) + 1}.jpg`
+        }))
+        setPosts(imgPost);
       } catch (err) {
       }
     }
@@ -34,6 +38,7 @@ export default function Main() {
     setPosts([
       {
         id: posts.length + 1,
+        img: `https://randomuser.me/api/portraits/women/${Math.floor(Math.random() * 90) + 1}.jpg`,
         ...e,
       },
       ...posts,
@@ -44,6 +49,12 @@ export default function Main() {
       body: '',
     });
   }
+
+    function handleDelete(e) {
+        setPosts(
+          posts.filter(post => post.id !== e)
+        )
+    }
 
   return (
     <>
@@ -60,10 +71,10 @@ export default function Main() {
       </Form>
 
       { posts.map((post) => (
+
         <Content key={post.id}>
-          <span>
-            Autor: {post.userId}
-          </span>
+          <img alt='imagem' src={post.img} />
+          <span>Autor: {post.userId}</span>
           <strong value={post.id}>{post.title}</strong>
           <span>{post.body}</span>
           <button
@@ -73,6 +84,7 @@ export default function Main() {
           >
             Detalhes
           </button>
+          <button type='button' onClick={(e) => handleDelete(post.id)}>Excluir</button>
         </Content>
       ))}
     </>

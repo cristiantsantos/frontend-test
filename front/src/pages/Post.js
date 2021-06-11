@@ -54,6 +54,9 @@ export default function Post() {
 
       <Content key={post.id}>
         <strong>Post</strong>
+        <img alt='imagem'
+            src={post.img}
+          />
         <span>
           username: {user}
         </span>

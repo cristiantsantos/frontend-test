@@ -15,6 +15,7 @@ export default function post(state = INITIAL_STATE, action) {
         draft.body = action.payload.body;
         draft.title = action.payload.title;
         draft.userId = action.payload.userId;
+        draft.img = action.payload.img;
         break;
       }
       default:
