@@ -1,82 +1,34 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import history from '../services/history';
+import { commentSet } from '../store/modules/comment/actions';
 
-import api from '../services/api';
-import { Content } from './styles';
 import Post from '../components/Post';
-
-import { Form } from '@unform/web';
-import Input from '../components/Input';
+import Comment from '../components/Comment'
+import NewComment from '../components/NewComment'
 
 export default function PostView() {
+  const dispatch = useDispatch();
   const post = useSelector((state) => state.post);
-  const [comments, setComments] = useState([]);
-  const [user, setUser] = useState([]);
-  const formRef = useRef(null);
-
+  const comments = useSelector((state) => state.comment.comments);
 
   useEffect(() => {
     async function loadComments(postId) {
-      try {
-        const responseComment = await api.get('/comments');
-        const postFilter = responseComment.data.filter((x) => x.postId === postId);
-        setComments(postFilter);
-
-        const responseUser = await api.get(`/users/${post.userId}`);
-        setUser(responseUser.data.username);
-      } catch (err) {
-      }
+      dispatch(commentSet(postId));
     }
     loadComments(post.id);
-  }, [post.id, post.userId]);
+  }, [post.id, dispatch]);
 
   function handleReturn() {
     history.goBack(1);
   }
-  function handleNewComment(e) {
-    setComments([
-      ...comments,
-      {
-        id: comments.length + 1,
-        ...e,
-      },
-    ]);
-    formRef.current.setData({
-      name: '',
-      body: '',
-    });
-  }
-
 
   return (
     <>
       <button type="button" onClick={() => handleReturn()}>Retornar</button>
-
-      <Post posts={ [post] } />
-
-      <Form ref={formRef} onSubmit={handleNewComment}>
-        <Content>
-          <span>Novo Comentário</span>
-          <Input name="name" placeholder="Nome" />
-          <Input name="body" placeholder="Descrição" />
-          <button type="submit">
-            Enviar Post
-          </button>
-        </Content>
-      </Form>
-
-      { comments.map((comment, _id) => (
-        <Content key={comment.id}>
-          <strong>
-            Comentário {_id + 1}
-          </strong>
-          <strong>
-            Nome: {comment.name}
-          </strong>
-          <span>{comment.body}</span>
-        </Content>
-      ))}
+      <Post posts={[post]} view />
+      <NewComment comments={comments} />
+      <Comment comments={comments} />
     </>
   );
 }

@@ -32,7 +32,7 @@ export default function Post({ posts, view }) {
             <span>Autor: {post.username}</span>
             <strong>{post.title}</strong>
             <span>{post.body}</span>
-            <button onClick={() => handlePostView(post)}>Detalhes</button>
+            {view? null : <button onClick={() => handlePostView(post)}>Detalhes</button>}
           </Content>
           {view? null : <button type="button" onClick={(e) => handleDelete(post.id)}>Excluir</button>}
         </Form>
