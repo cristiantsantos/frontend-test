@@ -8,7 +8,7 @@ import history from '../services/history';
 
 import { Content } from '../pages/styles';
 
-export default function Post({ posts }) {
+export default function Post({ posts, view }) {
   const dispatch = useDispatch();
   function handlePostView(post) {
     dispatch(postSet(post));
@@ -21,20 +21,24 @@ export default function Post({ posts }) {
 
   return (
     <>
+    {!posts ? null :
+    <>
       { posts.map((post) => (
         <Form key={post.id}>
           <Content>
             <LazyLoad height={200} once>
               <img alt="imagem" src={post.img} />
             </LazyLoad>
-            <span>Autor: {post.userId}</span>
+            <span>Autor: {post.username}</span>
             <strong>{post.title}</strong>
             <span>{post.body}</span>
             <button onClick={() => handlePostView(post)}>Detalhes</button>
           </Content>
-          <button type="button" onClick={(e) => handleDelete(post.id)}>Excluir</button>
+          {view? null : <button type="button" onClick={(e) => handleDelete(post.id)}>Excluir</button>}
         </Form>
       ))}
+      </>
+    }
     </>
   );
 }

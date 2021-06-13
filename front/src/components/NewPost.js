@@ -13,7 +13,7 @@ export default function Post({ posts }) {
   function handleNewPost(post) {
     dispatch(postAdd(posts, post));
     formRef.current.setData({
-      userId: '',
+      username: '',
       title: '',
       body: '',
     });
@@ -24,7 +24,7 @@ export default function Post({ posts }) {
       <Form ref={formRef} onSubmit={handleNewPost}>
         <Content>
           <span>Nova Postagem</span>
-          <Input name="userId" placeholder="Autor" />
+          <Input name="username" placeholder="Autor" />
           <Input name="title" placeholder="Título" />
           <Input name="body" placeholder="Descrição" />
         </Content>

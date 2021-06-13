@@ -5,13 +5,16 @@ import api from '../../../services/api'
 
 export function* loadallPosts() {
   try {
+    const users = yield call(api.get, '/users')
     const response = yield call(api.get, '/posts')
     const imgPost = response.data.map(post => ({
       ...post,
+      username: users.data.filter(x => x.id === post.userId)[0].username ,
       img: `https://avatars2.githubusercontent.com/u/${Math.floor(Math.random() * 300) + 1}?s=500`
     }))
     yield put(allpostsSetSuccess(imgPost));
   } catch (err) {
+    return err;
   }
 }
 export function* deletePosts({ payload }) {

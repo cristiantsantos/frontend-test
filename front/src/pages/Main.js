@@ -19,7 +19,7 @@ export default function Main() {
   return (
     <>
       <NewPost posts={posts} />
-      { !posts ? null : <Post posts={posts} />}
+      <Post posts={posts} view={false} />
     </>
   );
 }
