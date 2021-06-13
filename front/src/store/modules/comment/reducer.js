@@ -22,7 +22,6 @@ export default function comment(state = INITIAL_STATE, action) {
         break;
       }
       case '@comment/COMMENT_ADD_SUCCESS': {
-        console.log(action.payload)
         draft.comments = action.payload.newComments;
         break;
       }

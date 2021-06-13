@@ -5,17 +5,24 @@ import Input from '../components/Input';
 import { commentAdd } from '../store/modules/comment/actions';
 
 import { Content } from '../pages/styles';
+import NewCommentForm from '../validations/NewCommentForm';
 
 export default function Comment({ comments }) {
   const formRef = useRef(null);
   const dispatch = useDispatch();
 
-  function handleNewComment(comment) {
-    dispatch(commentAdd(comments, comment));
-    formRef.current.setData({
-      name: '',
-      body: '',
-    });
+  async function handleNewComment(comment) {
+    const validateSchema = await NewCommentForm(comment);
+    if (validateSchema === true) {
+      dispatch(commentAdd(comments, comment));
+      formRef.current.setErrors({});
+      formRef.current.setData({
+        name: '',
+        body: '',
+      });
+    } else {
+      formRef.current.setErrors(validateSchema);
+    }
   }
 
   return (

@@ -15,8 +15,6 @@ export function commentSetSuccess(comments) {
 }
 
 export function commentAdd(comments, comment) {
-  console.log(comments)
-  console.log(comment)
   return {
     type: '@comment/COMMENT_ADD',
     payload: { comments, comment } ,
