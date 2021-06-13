@@ -1,15 +1,30 @@
 
 
 
-export function commentSet({ postId, id, name, email, body }) {
+export function commentSet(postId) {
   return {
     type: '@comment/COMMENT_SET',
-    payload: { postId, id, name, email, body },
+    payload: { postId },
   };
 }
-export function commentSetSuccess(postId, id, name, email, body) {
+export function commentSetSuccess(comments) {
   return {
     type: '@comment/COMMENT_SET_SUCCESS',
-    payload: { postId, id, name, email, body },
+    payload: { comments },
+  };
+}
+
+export function commentAdd(comments, comment) {
+  console.log(comments)
+  console.log(comment)
+  return {
+    type: '@comment/COMMENT_ADD',
+    payload: { comments, comment } ,
+  };
+}
+export function commentAddSuccess(newComments) {
+  return {
+    type: '@comment/COMMENT_ADD_SUCCESS',
+    payload: { newComments },
   };
 }

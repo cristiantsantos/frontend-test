@@ -14,12 +14,16 @@ export default function comment(state = INITIAL_STATE, action) {
       case '@comment/COMMENT_SET': {
         break;
       }
+      case '@allposts/COMMENT_ADD': {
+        break;
+      }
       case '@comment/COMMENT_SET_SUCCESS': {
-        draft.postId = action.payload.postId;
-        draft.id = action.payload.id;
-        draft.name = action.payload.name;
-        draft.email = action.payload.email;
-        draft.body = action.payload.body;
+        draft.comments = action.payload.comments;
+        break;
+      }
+      case '@comment/COMMENT_ADD_SUCCESS': {
+        console.log(action.payload)
+        draft.comments = action.payload.newComments;
         break;
       }
       default:
