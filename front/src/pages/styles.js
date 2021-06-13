@@ -25,5 +25,8 @@ span {
 button {
   cursor:pointer;
 }
+img {
+  width: 200px;
+}
 
 `;
