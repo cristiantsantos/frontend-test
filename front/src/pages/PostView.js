@@ -4,11 +4,12 @@ import history from '../services/history';
 
 import api from '../services/api';
 import { Content } from './styles';
+import Post from '../components/Post';
 
 import { Form } from '@unform/web';
 import Input from '../components/Input';
 
-export default function Post() {
+export default function PostView() {
   const post = useSelector((state) => state.post);
   const [comments, setComments] = useState([]);
   const [user, setUser] = useState([]);
@@ -52,17 +53,7 @@ export default function Post() {
     <>
       <button type="button" onClick={() => handleReturn()}>Retornar</button>
 
-      <Content key={post.id}>
-        <strong>Post</strong>
-        <img alt='imagem'
-            src={post.img}
-          />
-        <span>
-          username: {user}
-        </span>
-        <strong value={post.id}>{post.title}</strong>
-        <span>{post.body}</span>
-      </Content>
+      <Post posts={ [post] } />
 
       <Form ref={formRef} onSubmit={handleNewComment}>
         <Content>

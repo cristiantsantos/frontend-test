@@ -27,3 +27,16 @@ export function postDeleteSuccess(newPosts) {
     payload: { newPosts },
   };
 }
+
+export function postAdd(posts, post) {
+  return {
+    type: '@allposts/ALLPOSTS_ADD',
+    payload: { posts, post } ,
+  };
+}
+export function postAddSuccess(newPosts) {
+  return {
+    type: '@allposts/ALLPOSTS_ADD_SUCCESS',
+    payload: { newPosts },
+  };
+}
