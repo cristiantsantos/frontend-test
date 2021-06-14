@@ -4,7 +4,7 @@ import { Form } from '@unform/web';
 import Input from '../components/Input';
 import { commentAdd } from '../store/modules/comment/actions';
 
-import { Content } from '../pages/styles';
+import { ContainerComment, ListPost } from '../pages/styles';
 import NewCommentForm from '../validations/NewCommentForm';
 
 export default function Comment({ comments }) {
@@ -26,15 +26,15 @@ export default function Comment({ comments }) {
   }
 
   return (
-    <>
-      <Form ref={formRef} onSubmit={handleNewComment}>
-        <Content>
+    <ContainerComment>
+      <ListPost>
+        <Form ref={formRef} onSubmit={handleNewComment}>
           <span>Novo Comentário</span>
           <Input name="name" placeholder="Nome" />
           <Input name="body" placeholder="Descrição" />
           <button type="submit">Enviar Comentário</button>
-        </Content>
-      </Form>
-    </>
+        </Form>
+      </ListPost>
+    </ContainerComment>
   );
 }

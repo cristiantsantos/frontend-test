@@ -4,6 +4,7 @@ import { allpostsSet } from '../store/modules/allposts/actions';
 
 import Post from '../components/Post';
 import NewPost from '../components/NewPost';
+import { Container } from '../pages/styles';
 
 export default function Main() {
   const dispatch = useDispatch();
@@ -17,9 +18,9 @@ export default function Main() {
   }, [dispatch]);
 
   return (
-    <>
+    <Container>
       <NewPost posts={posts} />
       <Post posts={posts} view={false} />
-    </>
+    </Container>
   );
 }

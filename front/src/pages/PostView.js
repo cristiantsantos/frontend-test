@@ -6,6 +6,7 @@ import { commentSet } from '../store/modules/comment/actions';
 import Post from '../components/Post';
 import Comment from '../components/Comment'
 import NewComment from '../components/NewComment'
+import { Container   } from '../pages/styles';
 
 export default function PostView() {
   const dispatch = useDispatch();
@@ -24,11 +25,11 @@ export default function PostView() {
   }
 
   return (
-    <>
+    <Container>
       <button type="button" onClick={() => handleReturn()}>Retornar</button>
       <Post posts={[post]} view />
       <NewComment comments={comments} />
       <Comment comments={comments} />
-    </>
+    </Container>
   );
 }

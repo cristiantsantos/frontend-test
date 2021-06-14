@@ -4,8 +4,8 @@ import { Form } from '@unform/web';
 import { postAdd } from '../store/modules/allposts/actions';
 
 import Input from '../components/Input';
-import { Content } from '../pages/styles';
 import NewPostForm from '../validations/NewPostForm';
+import { ContainerPost, ListPost } from '../pages/styles';
 
 export default function Post({ posts }) {
   const dispatch = useDispatch();
@@ -27,16 +27,16 @@ export default function Post({ posts }) {
   }
 
   return (
-    <>
-      <Form ref={formRef} onSubmit={handleNewPost}>
-        <Content>
+    <ContainerPost>
+      <ListPost>
+        <Form ref={formRef} onSubmit={handleNewPost}>
           <span>Nova Postagem</span>
           <Input name="username" placeholder="Autor" />
           <Input name="title" placeholder="Título" />
           <Input name="body" placeholder="Descrição" />
-        </Content>
-        <button type="submit">Enviar Post</button>
-      </Form>
-    </>
+          <button type="submit">Enviar Post</button>
+        </Form>
+      </ListPost>
+    </ContainerPost>
   );
 }

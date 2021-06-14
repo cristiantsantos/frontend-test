@@ -6,7 +6,7 @@ import { postSet } from '../store/modules/post/actions';
 import { postDelete } from '../store/modules/allposts/actions';
 import history from '../services/history';
 
-import { Content } from '../pages/styles';
+import { ContainerPost, ListPost } from '../pages/styles';
 
 export default function Post({ posts, view }) {
   const dispatch = useDispatch();
@@ -20,25 +20,25 @@ export default function Post({ posts, view }) {
   }
 
   return (
-    <>
-    {!posts ? null :
-    <>
-      { posts.map((post) => (
-        <Form key={post.id}>
-          <Content>
-            <LazyLoad height={200} once>
-              <img alt="imagem" src={post.img} />
-            </LazyLoad>
-            <span>Autor: {post.username}</span>
-            <strong>{post.title}</strong>
-            <span>{post.body}</span>
-            {view? null : <button onClick={() => handlePostView(post)}>Detalhes</button>}
-          </Content>
-          {view? null : <button type="button" onClick={(e) => handleDelete(post.id)}>Excluir</button>}
-        </Form>
-      ))}
-      </>
-    }
-    </>
+    <ContainerPost>
+      {!posts ? null :
+        <ListPost>
+          { posts.map((post) => (
+            <Form key={post.id}>
+              <LazyLoad height={200} once>
+                <img alt="imagem" src={post.img} />
+              </LazyLoad>
+              <span>Autor: {post.username}</span>
+              <strong>{post.title}</strong>
+              <span>{post.body}</span>
+              <ul>
+                {view ? null : <button onClick={() => handlePostView(post)}>Detalhes</button>}
+                {view ? null : <button type="button" onClick={(e) => handleDelete(post.id)}>Excluir</button>}
+              </ul>
+            </Form>
+          ))}
+        </ListPost>
+      }
+    </ContainerPost>
   );
 }
