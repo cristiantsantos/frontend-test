@@ -51,6 +51,7 @@ align-items: center;
 
 export const ListPost = styled.li`
 
+width: 100%;
 Form {
   list-style: none;
   max-width: 900px;
